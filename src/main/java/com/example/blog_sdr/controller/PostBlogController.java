@@ -80,18 +80,8 @@ public class PostBlogController {
     }
 
 
-//    @PostMapping("/home")
-//    public ModelAndView saveCustomer(@ModelAttribute("postBlog") PostBlog postBlog) {
-//
-//        postBlogService.save(postBlog);
-//        ModelAndView modelAndView = new ModelAndView("/post/home");
-//        modelAndView.addObject("postBlog", new PostBlog());
-//        modelAndView.addObject("message", "New post created successfully");
-//        return modelAndView;
-//    }
-
     @PostMapping("/home")
-    public ModelAndView saveCustomer(@ModelAttribute PostBlogForm postBlogForm) {
+    public String savePost(@ModelAttribute PostBlogForm postBlogForm){
         List<MultipartFile> multipartFiles = postBlogForm.getImg();
         for(int i=0; i< multipartFiles.size(); i++){
             String fileName = multipartFiles.get(i).getOriginalFilename();
@@ -104,11 +94,15 @@ public class PostBlogController {
             PostBlog postBlog = new PostBlog(postBlogForm.getId(), postBlogForm.getStt(), fileName,postingTime,postBlogForm.getCategory());
             postBlogService.save(postBlog);
         }
-        ModelAndView modelAndView = new ModelAndView("/post/home");
-        modelAndView.addObject("postBlog", new PostBlog());
-        modelAndView.addObject("message", "New post created successfully");
-        return modelAndView;
+
+        return "redirect:/home";
     }
+
+
+
+
+
+
 
 
     @PostMapping("/edit-post_blog")
@@ -123,20 +117,11 @@ public class PostBlogController {
         return modelAndView;
     }
 
-//    @GetMapping("/delete-post_blog/{id}")
-//    public String deleteCustomer(@PathVariable Long id) {
-//        postBlogService.remove(id);
-//        return "redirect:home";
-//    }
-
     @GetMapping("/delete-post_blog/{id}")
-    public ModelAndView showDeleteForm(@PathVariable Long id, Pageable pageable) {
+    public String showDeleteForm(@PathVariable Long id) {
         postBlogService.remove(id);
-        Page<PostBlog> posts= postBlogService.findAll(pageable);
-        ModelAndView modelAndView = new ModelAndView("/post/home");
-        modelAndView.addObject("post",posts);
-        modelAndView.addObject("postBlog", new PostBlog());
-        return modelAndView;
+        return "redirect:/home";
     }
+
 
 }

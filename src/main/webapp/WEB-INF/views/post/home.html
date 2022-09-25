@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <script src="https://kit.fontawesome.com/bb6a3cf0b7.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <style>
 
@@ -11,6 +12,10 @@
             font-size: 62.5%;
             line-height: 1.6rem;
             box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eeeeee;
         }
 
         .grid {
@@ -28,6 +33,100 @@
             width: 100%;
         }
 
+        .container__nav {
+            display: flex;
+            height: 30px;
+        }
+
+        .container__nav-search {
+            height: 100%;
+        }
+
+        .container__nav-link {
+            margin: auto 0;
+        }
+
+        .container__nav-link a {
+            font-size: 2rem;
+            margin: 0 10px 0 20px;
+            text-decoration: none;
+            color: #97b2c9;
+        }
+
+        .container__nav-link a:hover {
+            text-decoration: none;
+        }
+
+        .container__nav-search__input {
+            width: 500px;
+            margin: 0 10px 0 20px;
+            border-radius: 30px;
+            padding-left: 10px;
+            outline: none;
+            height: 100%;
+            border: none;
+            background-color: #eeeeee;
+        }
+
+        .container__nav-search__input-btn {
+            border-radius: 30px;
+            height: 100%;
+            background-color: #97b2c9;
+            outline: none;
+            border: none;
+            color: white;
+            width: 90px;
+        }
+
+        .container__nav-search__input-btn:hover {
+            cursor: pointer;
+        }
+
+        .form__input {
+            display: flex;
+            margin: 20px;
+        }
+
+        .form__input-input {
+            width: 95%;
+            position: relative;
+            background-color: #eee;
+            border-radius: 20px;
+        }
+
+        .form__input-input span {
+            margin: 10px 0 0 20px;
+            display: block;
+            font-size: 2rem;
+            position: absolute;
+            color: #969595;
+            top: 0;
+        }
+
+        .form__input-avatar {
+            width: 40px;
+            height: 40px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+
+        .form__input-submit {
+            display: block;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background-color: #eee;
+            border-radius: 20px;
+            outline: none;
+            border: none;
+        }
+
+
+        .form__input-submit:hover {
+            background-color: #d7d7d7;
+            cursor: pointer;
+        }
+
         .container__create-stt {
             display: block;
         }
@@ -37,6 +136,12 @@
             border: 1px solid #eee;
             border-radius: 4px;
             margin: 20px auto;
+            background-color: white;
+            box-shadow: 0.1rem 0.2rem 0.3rem #6a6969;
+        }
+
+        .container__a {
+            margin-top: 150px;
         }
 
         .container__create {
@@ -49,9 +154,9 @@
         }
 
         .avatar-img img {
-            width: 30px;
-            height: 30px;
-            margin-right: 5px;
+            width: 40px;
+            height: 40px;
+            margin-right: 8px;
             border-radius: 50%;
             display: block;
         }
@@ -59,19 +164,19 @@
         .avatar-name {
             font-size: 2rem;
             display: block;
-            margin-bottom: 3px;
-
+            margin-bottom: 10px;
         }
 
         .time-post {
+
             font-size: 1.4rem;
             font-weight: 200;
         }
 
         .container__stt {
             display: block;
-            width: 90%;
-            margin: 20px 0 20px 0;
+            line-height: 2.4rem;
+            margin: 20px 0;
             font-size: 2rem;
         }
 
@@ -100,118 +205,232 @@
             justify-content: flex-end;
             color: #6a6969;
         }
+
+        .container__cmt-action {
+            position: relative;
+        }
+
+        .container__cmt-action-submit {
+            position: absolute;
+        }
+
+
+        .container__wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            background-color: transparent;
+
+        }
+
+        .nav {
+
+            width: 45.5%;
+            justify-items: center;
+            margin: 0 auto;
+            padding-top: 40px;
+            border: 1px solid #eee;
+            background-color: white;
+            box-shadow: 0.1rem 0.2rem 0.3rem #6a6969;
+        }
+
+        /*form create*/
+
+        .modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .modal__overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal__body {
+            position: relative;
+            width: 500px;
+            background-color: white;
+            margin: 150px auto;
+            z-index: 1;
+            border-radius: 5px;
+            box-shadow: 1rem 1rem 4rem #444343;
+        }
+
+        .container__create-title {
+            padding: 0px 10px 0 150px;
+            border-bottom: 1px solid #999595;
+        }
+
+        .container__create-title_name {
+            font-size: 3rem;
+            margin-right: 95px;
+        }
+
+        .container__create-form {
+            margin: 20px;
+        }
+
+        .container__avatar-form {
+
+            margin-bottom: 10px;
+        }
+
+        .container__avatar-form-name {
+            margin: 5px 0;
+        }
+
+        .container__avatar-form-img img {
+            margin-right: 5px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .container__avatar-form-select {
+            border: none;
+            background-color: #E4E6EB;
+            border-radius: 55px;
+            text-align: center;
+        }
+
+        .container__avatar-form-select:focus {
+            outline: none;
+        }
+
+        .container__create-stt-input {
+            font-size: 2rem;
+            outline: none;
+        }
+
+        .form__input-input-hide {
+            margin: 20px 0;
+            width: 100%;
+            font-size: 2.6rem;
+            height: 40px;
+            border: none;
+            background-color: #E4E6EB;
+            border-radius: 5px;
+        }
+
+        .form__input-input-hide:hover {
+            cursor: pointer;
+        }
+
+        .container__create-title_btn {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 2.3rem;
+            color: #706969;
+            background-color: #e4e6eb;
+            border: none;
+        }
+
+        .container__create-img-img-img {
+            position: relative;
+            height: 200px;
+            border-radius: 4px;
+        }
+
+        .container__create-img-input {
+            background-color: #97b2c9;
+            height: 200px;
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            border-radius: 4px;
+        }
+
+        .container__create-img-input:hover {
+            cursor: pointer;
+        }
+
+        .container__create-img-span {
+            margin-top: 100px;
+        }
+
+        .container__create-stt-p {
+            font-size: 2rem;
+            color: #787575;
+        }
+
+        /*form create*/
     </style>
 </head>
 <body>
+
 <div class="grid">
     <div class="grid__row">
         <div class="grid__column-12">
-            <nav>
-                <div class="nav__container">
-                    <form class="nav__search" action="/search" method="post">
-                        <input type="text" placeholder="Search" name="search">
-                        <input type="submit" value="Search">
-                    </form>
-                    <div class="nav__memu">
-                        <a href="/home?show=create"> Create PostBlog</a>
-                        <div class="container js-file-list">
+
+            <div class="container__wrap">
+                <div class="nav">
+                    <div class="container__nav">
+                        <form class="container__nav-search" >
+                            <input class="container__nav-search__input" type="text" placeholder="Search" name="search">
+                            <input class="container__nav-search__input-btn" type="submit" value="Search">
+                        </form>
+                        <div class="container__nav-link">
+                            <a href="/home" class="container__nav-title"><i class="fa-solid fa-house"></i></a>
+                            <a class="container__nav-title" href="/category/home">Category list</a>
                         </div>
-                        <a class="nav__menu-title" href="/category/home">Category list</a>
                     </div>
-                </div>
-            </nav>
-        </div>
-    </div>
 
-</div>
-
-<div class="grid">
-    <div class="grid__row">
-        <div class="grid__column-12">
-
-            <div class="container">
-                <th:block th:if="${message}">
-                    <p th:text="${message}"></p>
-                </th:block>
-
-                <div th:switch="${show}">
-                    <form th:case="create" th:action="@{home}" th:object="${postBlog}" method="post"
-                          novalidate="novalidate"
-                          enctype="multipart/form-data">
-                        <input class="container__create-stt" type="text" th:field="*{stt}"
-                               placeholder="Bạn đang nghĩ gì?"/>
-                        <div style="user-select: text; white-space: pre-wrap; word-break: break-word; font-size: 24px;">
-
+                    <div class="form__input">
+                        <img class="form__input-avatar" th:src="@{'/image/'+avatar_6.jpg}" alt="">
+                        <div class="form__input-input">
+                            <input class="form__input-submit" type="submit" value="">
+                            <span>Bạn đang nghĩ gì thế?</span>
                         </div>
+                    </div>
 
-                        <!--                        Thêm-->
+                </div>
 
-                        <div class="jcxyg2ei alzwoclg">
-                            <div class="f5m7p0br iwso50tu ggolc4ur js4msrqk bdao358l pbevjfx6 rrjlc0n4 qntmu8s7 tes86rjd pytsy3co tq4zoyjo icdlwmnq d2hqwtrz oxkhqvkx r5g9zsuq nch0832m mfclru0v i6jx4p3a">
-                                <div aria-label="Tum ơi, bạn đang nghĩ gì thế?"
-                                     class="pbevjfx6 icdlwmnq om3e55n1 l4e6dv8b bdao358l b6ax4al1 pytsy3co mfclru0v notranslate"
-                                     contenteditable="true" role="textbox" spellcheck="true" tabindex="0"
-                                     data-lexical-editor="true" th:field="*{stt}"
-                                     style="user-select: text; white-space: pre-wrap; word-break: break-word; font-size: 24px;" >
-                                    <p class="cr00lzj9 kmwttqpk kjdc1dyq l7ghb35v m8h3af8h"><br></p></div>
-<!--                                <div class="rtxb060y lq84ybu9 hf30pyar l10tt5db s8sjc6am oshhggmv amoyoo19 f14ij5to qm54mken b0ur3jhr">-->
-<!--                                    Tum ơi, bạn đang nghĩ gì thế?-->
-<!--                                </div>-->
+
+            </div>
+
+            <div class="container__a">
+                <div class="container" th:each="p : ${post}">
+
+                    <div class="container__create">
+                        <div class="container__avatar">
+                            <div class="avatar-img">
+                                <img th:src="@{'/image/'+avatar_6.jpg}" alt="">
                             </div>
+                            <div>
+                                <span class="avatar-name">Tum Tum</span>
+                                <span class="time-post category" th:text="${p.category.name}"></span>
+                                <span class="time-post">--</span>
+                                <span class="time-post" th:text="${p.postingTime}"></span>
+                            </div>
+
                         </div>
 
-
-                        <!--                        Thêm-->
-
-
-                        <input type="file" th:field="*{img}" multiple placeholder="Nhập ảnh"/>
-                        <label>Province:</label>
-                        <select th:field="*{category}">
-                            <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
-                        </select>
-                        <input type="submit" value="Create Post">
-                    </form>
-
-                    <form th:case="edit" th:action="@{edit-post_blog}" th:object="${postBlog}" method="post">
-                        <input type="hidden" th:field="*{id}">
-                        <input type="text" th:field="*{stt}" placeholder="Bạn đang nghĩ gì?"/>
-                        <input type="file" th:field="*{img}" placeholder="Nhập ảnh"/>
-                        <label>Province:</label>
-                        <select th:field="*{category}">
-                            <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
-                        </select>
-                        <input type="submit" value="Update Post">
-                    </form>
-                </div>
-            </div>
-
-
-            <div class="container" th:each="p : ${post}">
-
-                <div class="container__create">
-                    <div class="container__avatar">
-                        <div class="avatar-img">
-                            <img th:src="@{'/image/'+avatar_6.jpg}" alt="">
+                        <span class="container__stt" th:text="${p.stt}"></span>
+                        <div class="container__create-img">
+                            <img class="container__create-img-img" th:src="@{'/image/' + ${p.img}}" alt="">
                         </div>
-                        <div>
-                            <span class="avatar-name">Tum Tum</span>
-                            <span class="time-post" th:text="${p.postingTime}"></span>
+                        <div class="container__cmt">
+                            <input class="container__cmt-input" type="text" placeholder="Viết bình luận">
+                            <a class="container__cmt-action submit" th:href="@{/home?show=edit&id=__${p.id}__ }"><i
+                                    class="fa-solid fa-pen-to-square"></i>
+                                <!--                            <input class="form__input-submit container__cmt-action-submit" type="submit" value="">-->
+                            </a>
+                            <a class="container__cmt-action" th:href="@{/delete-post_blog/__${p.id}__ }">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </div>
 
                     </div>
-
-                    <span class="container__stt" th:text="${p.stt}"></span>
-                    <div class="container__create-img">
-                        <img class="container__create-img-img" th:src="@{'/image/' + ${p.img}}" alt="">
-                    </div>
-                    <div class="container__cmt">
-                        <input class="container__cmt-input" type="text" placeholder="Viết bình luận">
-                        <a class="container__cmt-action" th:href="@{/home?show=edit&id=__${p.id}__ }"><i
-                                class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="container__cmt-action" th:href="@{/delete-post_blog/__${p.id}__ }"><i
-                                class="fa-solid fa-trash"></i></a>
-                    </div>
-
                 </div>
             </div>
 
@@ -220,7 +439,128 @@
     </div>
 </div>
 
+<div class="form__input-input-create modal" style="display: none">
+    <div class="modal__overlay"></div>
+    <div class="modal__body">
+        <div class="modal__inner">
+            <div class="container__create-title">
+                <span class="container__create-title_name">Tạo bài viết mới</span>
+                <button class="container__create-title_btn form__input-input-hide"><i class="fa-solid fa-x"></i>
+                </button>
+            </div>
 
+            <form th:action="@{home}" th:object="${postBlog}" method="post"
+                  novalidate="novalidate"
+                  enctype="multipart/form-data" class="container__create-form">
+                <div class="container__avatar container__avatar-form">
+                    <div class="avatar-img container__avatar-form-img">
+                        <img th:src="@{'/image/'+avatar_6.jpg}" alt="">
+                    </div>
+                    <div>
+                        <span class="avatar-name container__avatar-form-name">Tum Tum</span>
+                        <select th:field="*{category}" class="container__avatar-form-select">
+                            <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                        </select>
+                    </div>
+
+                </div>
+                <input class="container__create-stt" type="hidden" th:field="*{stt}"
+                       placeholder="Bạn đang nghĩ gì?"/>
+                <p class="container__create-stt-p">Bạn đang nghĩ gì?</p>
+                <p contenteditable="true" style="display: none" class="container__create-stt-input"><br></p>
+                <div class="container__create-img container__create-img-img-img">
+                    <img class="container__create-img__src" src="" alt="">
+                    <label for="container__create-img-input" class="container__create-img-input">
+                        <div class="container__create-img-span">
+                            <span><i class="fa-solid fa-image"></i></span>
+                            <span>Thêm ảnh</span>
+                        </div>
+
+                    </label>
+                    <input id="container__create-img-input" hidden type="file" th:field="*{img}" multiple
+                           placeholder="Nhập ảnh"/>
+                </div>
+                <input type="submit" class="form__input-input-hide form__input-input-hide__input " value="Đăng">
+            </form>
+
+            <!--                        Thêm-->
+
+            <!--            <div class="jcxyg2ei alzwoclg">-->
+            <!--                <div class="f5m7p0br iwso50tu ggolc4ur js4msrqk bdao358l pbevjfx6 rrjlc0n4 qntmu8s7 tes86rjd pytsy3co tq4zoyjo icdlwmnq d2hqwtrz oxkhqvkx r5g9zsuq nch0832m mfclru0v i6jx4p3a">-->
+            <!--                    <div aria-label="Tum ơi, bạn đang nghĩ gì thế?"-->
+            <!--                         class="pbevjfx6 icdlwmnq om3e55n1 l4e6dv8b bdao358l b6ax4al1 pytsy3co mfclru0v notranslate"-->
+            <!--                         contenteditable="true" role="textbox" spellcheck="true" tabindex="0"-->
+            <!--                         data-lexical-editor="true"-->
+            <!--                         style="user-select: text; white-space: pre-wrap; word-break: break-word; font-size: 24px;">-->
+            <!--                        <p class="cr00lzj9 kmwttqpk kjdc1dyq l7ghb35v m8h3af8h container__create-stt-input"><br></p></div>-->
+            <!--                    <div class="rtxb060y lq84ybu9 hf30pyar l10tt5db s8sjc6am oshhggmv amoyoo19 f14ij5to qm54mken b0ur3jhr">-->
+            <!--                        Tum ơi, bạn đang nghĩ gì thế?-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+
+            <!--                        Thêm-->
+
+
+        </div>
+    </div>
+
+</div>
 </body>
+
+<script>
+    $(document).ready(function () {
+        $(".form__input-input-hide").click(function () {
+            $(".form__input-input-create").hide();
+        });
+        $(".submit").click(function () {
+            $(".form__input-input-create").show();
+            $(".container__create-form").attr('action', 'edit-post_blog');
+        });
+
+        $(".form__input-input-hide").click(function () {
+            $(".form__input-input-create").hide();
+        });
+
+        $(".modal__overlay").click(function () {
+            $(".form__input-input-create").hide();
+        });
+
+        $(".form__input-submit").click(function () {
+            $(".form__input-input-create").show();
+            $(".container__create-form").attr('action', 'home');
+        });
+
+
+        $(".form__input-input-hide").click(function () {
+            var str = $(".container__create-stt-input").text();
+            $(".container__create-stt").val(str);
+        });
+
+        $(".container__create-stt-p").click(function () {
+            $(".container__create-stt-p").hide();
+        });
+        $(".container__create-stt-p").click(function () {
+            $(".container__create-stt-input").show();
+        });
+
+        $(".container__create-stt-input").click(function () {
+
+            var str1 = $(".container__create-stt-input").text();
+            if (str1 != null) {
+                $(".form__input-input-hide__input").attr('style', 'background-color: #1A6ED8; color:white');
+            }
+        });
+
+        $(".container__create-img-input").click(function () {
+            var str = '/image/' + $("#container__create-img-input").text();
+            $(".container__create-img__src").attr('href', str);
+        });
+
+
+    });
+</script>
+
 
 </html>
