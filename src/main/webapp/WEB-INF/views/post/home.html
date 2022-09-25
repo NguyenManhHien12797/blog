@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://kit.fontawesome.com/bb6a3cf0b7.js" crossorigin="anonymous"></script>
+
+    <style>
+
+        html {
+            font-size: 62.5%;
+            line-height: 1.6rem;
+            box-sizing: border-box;
+        }
+
+        .grid {
+            width: 1200px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .grid__row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .grid__column-12 {
+            width: 100%;
+        }
+
+        .container__create-stt {
+            display: block;
+        }
+
+        .container {
+            width: 70%;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin: 20px auto;
+        }
+
+        .container__create {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .container__avatar {
+            display: flex;
+        }
+
+        .avatar-img img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .avatar-name {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 3px;
+
+        }
+
+        .time-post {
+            font-size: 1.4rem;
+            font-weight: 200;
+        }
+
+        .container__stt {
+            display: block;
+            width: 90%;
+            margin: 20px 0 20px 0;
+            font-size: 2rem;
+        }
+
+        .container__create-img-img {
+            width: 100%;
+        }
+
+        .container__cmt {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #eee;
+        }
+
+        .container__cmt-input {
+            outline: none;
+            border: none;
+            width: 90%;
+            font-size: 2rem;
+            height: 35px;
+            margin-left: 15px;
+        }
+
+        .container__cmt-action {
+            font-size: 2rem;
+            display: inline-flex;
+            justify-content: flex-end;
+            color: #6a6969;
+        }
+    </style>
+</head>
+<body>
+<div class="grid">
+    <div class="grid__row">
+        <div class="grid__column-12">
+            <nav>
+                <div class="nav__container">
+                    <form class="nav__search" action="/search" method="post">
+                        <input type="text" placeholder="Search" name="search">
+                        <input type="submit" value="Search">
+                    </form>
+                    <div class="nav__memu">
+                        <a href="/home?show=create"> Create PostBlog</a>
+                        <div class="container js-file-list">
+                        </div>
+                        <a class="nav__menu-title" href="/category/home">Category list</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+<div class="grid">
+    <div class="grid__row">
+        <div class="grid__column-12">
+
+            <div class="container">
+                <th:block th:if="${message}">
+                    <p th:text="${message}"></p>
+                </th:block>
+
+                <div th:switch="${show}">
+                    <form th:case="create" th:action="@{home}" th:object="${postBlog}" method="post"
+                          novalidate="novalidate"
+                          enctype="multipart/form-data">
+                        <input class="container__create-stt" type="text" th:field="*{stt}"
+                               placeholder="Bạn đang nghĩ gì?"/>
+                        <div style="user-select: text; white-space: pre-wrap; word-break: break-word; font-size: 24px;">
+
+                        </div>
+
+                        <!--                        Thêm-->
+
+                        <div class="jcxyg2ei alzwoclg">
+                            <div class="f5m7p0br iwso50tu ggolc4ur js4msrqk bdao358l pbevjfx6 rrjlc0n4 qntmu8s7 tes86rjd pytsy3co tq4zoyjo icdlwmnq d2hqwtrz oxkhqvkx r5g9zsuq nch0832m mfclru0v i6jx4p3a">
+                                <div aria-label="Tum ơi, bạn đang nghĩ gì thế?"
+                                     class="pbevjfx6 icdlwmnq om3e55n1 l4e6dv8b bdao358l b6ax4al1 pytsy3co mfclru0v notranslate"
+                                     contenteditable="true" role="textbox" spellcheck="true" tabindex="0"
+                                     data-lexical-editor="true" th:field="*{stt}"
+                                     style="user-select: text; white-space: pre-wrap; word-break: break-word; font-size: 24px;" >
+                                    <p class="cr00lzj9 kmwttqpk kjdc1dyq l7ghb35v m8h3af8h"><br></p></div>
+<!--                                <div class="rtxb060y lq84ybu9 hf30pyar l10tt5db s8sjc6am oshhggmv amoyoo19 f14ij5to qm54mken b0ur3jhr">-->
+<!--                                    Tum ơi, bạn đang nghĩ gì thế?-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+
+
+                        <!--                        Thêm-->
+
+
+                        <input type="file" th:field="*{img}" multiple placeholder="Nhập ảnh"/>
+                        <label>Province:</label>
+                        <select th:field="*{category}">
+                            <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                        </select>
+                        <input type="submit" value="Create Post">
+                    </form>
+
+                    <form th:case="edit" th:action="@{edit-post_blog}" th:object="${postBlog}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="text" th:field="*{stt}" placeholder="Bạn đang nghĩ gì?"/>
+                        <input type="file" th:field="*{img}" placeholder="Nhập ảnh"/>
+                        <label>Province:</label>
+                        <select th:field="*{category}">
+                            <option th:each="c : ${category}" th:value="${c.id}" th:text="${c.name}"></option>
+                        </select>
+                        <input type="submit" value="Update Post">
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="container" th:each="p : ${post}">
+
+                <div class="container__create">
+                    <div class="container__avatar">
+                        <div class="avatar-img">
+                            <img th:src="@{'/image/'+avatar_6.jpg}" alt="">
+                        </div>
+                        <div>
+                            <span class="avatar-name">Tum Tum</span>
+                            <span class="time-post" th:text="${p.postingTime}"></span>
+                        </div>
+
+                    </div>
+
+                    <span class="container__stt" th:text="${p.stt}"></span>
+                    <div class="container__create-img">
+                        <img class="container__create-img-img" th:src="@{'/image/' + ${p.img}}" alt="">
+                    </div>
+                    <div class="container__cmt">
+                        <input class="container__cmt-input" type="text" placeholder="Viết bình luận">
+                        <a class="container__cmt-action" th:href="@{/home?show=edit&id=__${p.id}__ }"><i
+                                class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="container__cmt-action" th:href="@{/delete-post_blog/__${p.id}__ }"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
